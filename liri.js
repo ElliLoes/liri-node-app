@@ -1,7 +1,7 @@
 require("dotenv").config();
 var keys = require("./keys.js");
-var spotify = new Spotify(keys.spotify);
 let Spotify = require("node-spotify-api");
+var spotify = new Spotify(keys.spotify);
 let axios = require("axios");
 let moment = require("moment");
 let fs = require("fs");
@@ -9,22 +9,14 @@ let fs = require("fs");
 let command = process.argv[2];
 let search = process.argv.slice(3).join(" ");
 
-switch (command) {
-    case "concert-this":
-        searchBand(search);
-        break;
-        case "spotify-this-song":
-            searchSpotify(search);
-            break;
-            case "movie-this":
-                searchMovie();
-                break;
-}
-
-let searchBand = function (search) {
-    axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp")
+function searchBand (search) {
+    axios.get("https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp")
         .then(function (response) {
-            for (var i = 0; i < 5; i++) {
+            if (response.data.length === 0) {
+                console.log("There are no upcoming shows! Sorry.");
+                return;
+            }
+            for (var i = 0; i < Math.min(response.data.length, 5); i++) {
                 let resultConcert = "\nVenue Name: " + response.data[i].venue.name +
                     "\nVenue Location: " + response.data[i].venue.city +
                     "\nDate of the event: " + moment(response.data[i].datetime).format("MM/DD/YYYY");
@@ -36,16 +28,20 @@ let searchBand = function (search) {
         });
 }
 
-let searchSpotify = function (search) {
+function searchSpotify (search) {
     if (!search) {
         search = "The Sign: Ace of Base";
     }
-    sportify.search({
+    spotify.search({
         type: 'artist,track',
         query: search
     }, function (err, response) {
         if (err) {
             return console.log("Error occurred: " + err);
+        }
+        if (response.tracks.items.length ===0) {
+            console.log("Sorry, there is no result. Try again!");
+            return;
         }
         let resultSong = "\nArtist(s): " + response.tracks.items[0].artists[0].name +
             "\nSong name: " + response.tracks.items[0].name +
@@ -56,7 +52,7 @@ let searchSpotify = function (search) {
 }
 
 
-let searchMovie = function (search) {
+function searchMovie (search) {
     if (!search) {
         search = "Mr. Nobody"
     }
@@ -76,18 +72,30 @@ let searchMovie = function (search) {
         });
 }
 
-let doWhatItSays = function () {
+function doWhatItSays () {
     fs.readFile("random.txt", "utf8", function (error, data) {
         if (error) {
             return console.log(error);
-            }
+        }
         let dataArray = data.split(",");
         spotifySearch(dataArray[1])
-    })                                                                         
+    })
+}
+
+switch (command) {
+    case "concert-this":
+        searchBand(search);
+        break;
+    case "spotify-this-song":
+        searchSpotify(search);
+        break;
+    case "movie-this":
+        searchMovie(search);
+        break;
+    case "do-what-it-says":
+        doWhatItSays();
 }
 
 
 
 
-
-    
