@@ -9,6 +9,18 @@ let fs = require("fs");
 let command = process.argv[2];
 let search = process.argv.slice(3).join(" ");
 
+switch (command) {
+    case "concert-this":
+        searchBand(search);
+        break;
+        case "spotify-this-song":
+            searchSpotify(search);
+            break;
+            case "movie-this":
+                searchMovie();
+                break;
+}
+
 let searchBand = function (search) {
     axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp")
         .then(function (response) {
@@ -44,7 +56,7 @@ let searchSpotify = function (search) {
 }
 
 
-let searchMovie = function () {
+let searchMovie = function (search) {
     if (!search) {
         search = "Mr. Nobody"
     }
@@ -73,5 +85,9 @@ let doWhatItSays = function () {
         spotifySearch(dataArray[1])
     })                                                                         
 }
+
+
+
+
 
     
