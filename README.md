@@ -2,7 +2,7 @@
 
 ## What is it?
 
-Liri Bot is a Language Interpretation and Recognition Interface. It is a command line node application that takes in parameters, for example song or movie names and gives back a curated list of related data.
+Liri Bot is a Language Interpretation and Recognition Interface. It is a command line node application that takes in parameters, for example song or movie names and gives back a curated list of related data. You can view a demonstration of the app here: 
 
 ## How is the app organized?
 
@@ -36,7 +36,7 @@ Liri Bot is a Language Interpretation and Recognition Interface. It is a command
 SPOTIFY_ID=your-spotify-id
 SPOTIFY_SECRET=your-spotify-secret
 ```
-  * The Spotify API requires you sign up as a developer to generate the necessary credentials. You can follow these steps in  order to generate a client id and client secret:
+  * The Spotify API requires you sign up as a developer to generate the necessary credentials. You can follow these steps in     order to generate a client id and client secret:
 
   * Step One: Visit https://developer.spotify.com/my-applications/#!/
 
@@ -46,7 +46,7 @@ SPOTIFY_SECRET=your-spotify-secret
 
   * Step Four: On the next screen, scroll down to where you see your client id and client secret
 
-1. After setting everything up, go back to the command terminal/bash window and choose one of the four following commands and type them into your command line, replacing the search targets:
+5. After setting everything up, go back to the command terminal/bash window and choose one of the four following commands and type them into your command line, replacing the search targets:
 
 ```
 node liri.js concert-this <artist/band name here>
@@ -54,8 +54,13 @@ node liri.js spotify-this-song '<song name here>'
 node liri.js movie-this '<movie name here>'
 node liri.js do-what-it-says
 ```
-Have fun!
 
 ## My Role in the development of the app?
 
 Developer (Who would have thought?)
+
+You can find a link to the deplyed version of the app here: https://github.com/ElliLoes/liri-node-app.git
+
+Have fun!
+
+
