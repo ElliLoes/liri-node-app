@@ -4,6 +4,8 @@
 
 Liri Bot is a Language Interpretation and Recognition Interface. It is a command line node application that takes in parameters, for example song or movie names and gives back a curated list of related data. You can view a demonstration of the app here: 
 
+![Demo](liri_demo.gif)
+
 ## How is the app organized?
 
 * The main javascript file of the application is liri.js which contains the main code for the functionlaity of the                application.
