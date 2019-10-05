@@ -56,15 +56,19 @@ function searchMovie (search) {
     if (!search) {
         search = "Mr. Nobody"
     }
-    axios.get("http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy")
+    axios.get("http://www.omdbapi.com/?t=" + search + "&y=&plot=short&tomatoes=true&apikey=trilogy")
         .then(function (response) {
             let resultMovie = "\nTitle: " + response.data.Title +
                 "\nYear: " + response.data.Year +
                 "\nRating IMDB: " + response.data.Ratings[0].Value +
+
+                // Rotten Tomatoes Rating will always be N/A as the Rotten Tomatoes data was removed to comply with a legal request from Fandango (who owns Rotten Tomatoes).
+
+                "\nRotten Tomatoes Rating: " + response.data.tomatoRating +
                 "\nCountry: " + response.data.Country +
                 "\nLanguage: " + response.data.Language +
                 "\nPlot: " + response.data.Plot +
-                "\nActors: " + reponse.data.Actors;
+                "\nActors: " + response.data.Actors;
             console.log(resultMovie);
         })
         .catch(function (error) {
@@ -78,7 +82,7 @@ function doWhatItSays () {
             return console.log(error);
         }
         let dataArray = data.split(",");
-        spotifySearch(dataArray[1])
+        searchSpotify(dataArray[1])
     })
 }
 
